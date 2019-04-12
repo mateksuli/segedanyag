@@ -1,0 +1,228 @@
+\startproject iras
+\mainlanguage[hu]
+\setupalign[
+  justified,
+  nothanging,
+  nohz,
+  hyphenated,
+  morehyphenated,
+  tolerant,
+]
+\setupinterlinespace[height=0.75,depth=0.25]
+\setuplayout[
+  grid=no,
+  location=middle,
+]
+\setupformulas[align=middle]
+%\setupmathalignment[grid=no]
+
+\def\PagenumberingCommand#1{\doifnot\pagenumber1{#1}}
+\setuppagenumbering[
+  location={footer,middle},
+  command=\PagenumberingCommand,
+]
+\setuppapersize[A4]
+\setuplayout[
+    backspace=30mm,
+    width=150mm,
+    topspace=30mm,
+    header=0mm,
+    footer=15mm,
+    footerdistance=0mm,
+    bottom=0mm,
+    bottomdistance=0mm,
+    height=247mm
+]
+
+% Betűkészlet
+%\setupbodyfont[libertinus,12pt]
+\setupbodyfont[12pt]
+
+% Vékony spácium bizonyos karakterek előtt (:;?!)
+\definecharacterspacing [magyarpunctuation]
+\setupcharacterspacing [magyarpunctuation] ["0021] [left=.1,alternative=1] % ! % strip preceding space(char)
+\setupcharacterspacing [magyarpunctuation] ["003A] [left=.1,alternative=1] % : % strip preceding space(char)
+\setupcharacterspacing [magyarpunctuation] ["003B] [left=.1,alternative=1] % ; % strip preceding space(char)
+\setupcharacterspacing [magyarpunctuation] ["003F] [left=.1,alternative=1] % ? % strip preceding space(char)
+
+% A magyar nyelv beállításai
+\startsetups[magyar]
+  % Vékony spácium bizonyos karakterek előtt (:;?!)
+  \setcharacterspacing[magyarpunctuation]
+  \setupindenting[%
+    yes,% A bekezdéseket behúzással kezdjük.
+    %next,% Az első bekezdés nincs behúzva.
+    medium% Közepes méretű (átmeneti megoldás: igazából a mérete 24 cicerós sorig 1 kvirt, nagyobbbnál 2 kvirt kellene legyen -> TENNIALÓ)
+  ]
+\stopsetups
+
+\setuplanguage[hu][%
+  setups=magyar,% Érvényesíti a fent megadott beállításokat.
+  spacing=packed% Frenchspacing (Gyurgyák 319. o.: egyenletes szóközök).
+                % http://wiki.contextgarden.net/French_spacing).
+]
+
+% TENNIVALÓ: csak magyar nyelvre
+% Idézetek (Gyurgyák, 86--87. o.).
+\definedelimitedtext[quote][location=text]
+\setupdelimitedtext[quote:1][
+  left={\lowerleftdoubleninequote},
+  right={\upperrightdoubleninequote},
+  spaceafter=0
+]
+\setupdelimitedtext[quote:2][
+  left={\rightguillemot\nobreak\hskip-.07em},
+  right={\kern-0.03em\leftguillemot},
+  spaceafter=0
+]
+\setupdelimitedtext[quote:3][
+  left={\upperleftsingleninequote},
+  right={\upperrightsingleninequote},
+  spaceafter=0
+]
+
+\definebodyfontenvironment[default][em=italic]
+
+\defineframedtext[kerdes][align=center,offset=0.5ex,style=italic,width=\dimexpr0.8\dimexpr\makeupwidth]
+
+\defineframedtext[kivonat][offset=0.5ex, frame=off,style=italic,width=\dimexpr0.8\dimexpr\makeupwidth]
+
+\definehead[feladat][subsubsubject]
+\setuphead[feladat][
+    number=no,
+    textdistance=0pt,
+    alternative=text,
+    style=bf,
+    commandafter={\hbox{.\quad}},
+]
+
+\definebar[mathubar][underbar]  % enélkül esetleg elcsúszik az aláhúzás
+
+%\showgrid[all]
+
+\definehead[cim][chapter]
+\setuphead[cim][number=no,align=middle,after={},]
+
+\startproduct iras
+\startbodymatter
+
+\cim{Összeadás és kivonás}
+
+\startkivonat
+Az alábbi szöveg Obádovics J{.} Gyula {\em Matematika} című könyvéből származik. Néhány kisebb módosítás, kiegészítés viszont történt.
+\stopkivonat
+
+Két munkás közül az egyik egy óra alatt 34 szegecset illesztett be, a másik 27-et. Hány szegecset illesztettek be együtt egy óra alatt?
+
+Annyi szegecset illesztettek be, mint amennyi 34 és 27 együttvéve, amelynek a matematikai írásmódja: $34+27=61$ (olv.: harmincnégy {\em plusz} huszonhét egyenlő hatvaneggyel). Ez a művelet az összeadás, műveleti jele: $+$. A 34-et és a 27-et összeadandóknak vagy {\em tagoknak}, az eredményt, a 61-et pedig {\em összegnek} nevezzük.
+
+\startformula \startmathalignment[n=1]
+\NC \text{összeadandó} + \text{összeadandó} = \text{összeg} \NR[+]
+\NC \text{tag} + \text{tag} = \text{összeg} \NR[+]
+\stopmathalignment \stopformula
+
+Az összeadás első fontos tulajdonsága, hogy a {\em tagok sorrendje felcserélhető}, az összegük nem változik, azaz az összeg független az összeadás sorrendjétől. Ez az összeadás felcserélési (kommutatív) törvénye.
+
+\startformula 3+5=5+3=8 \stopformula
+
+Az összeadás második fontos tulajdonsága, hogy a tagokat tetszés szerint csoportosíthatjuk, az összeg nem változik. Például három tag esetén bármelyik kettő összegéhez hozzáadhatjuk a harmadik tagot, az összeg nem változik. Ez az összeadás csoportosítási (asszociatív) törvénye.
+
+\startformula (3+5)+7=3+(5+7)=15 \stopformula
+
+Az összeadást többjegyű összeadandók esetén a következő módon végezzük: a számokat úgy írjuk egymás alá, hogy az azonos helyi értékű számjegyek egymás alá kerüljenek.
+Az utolsó összeadandót aláhúzzuk. Például:
+
+\startformula
+%{\framed[width=\textwidth,frame=off,align=middle,after={\blank}]{
+{\framed[frame=off,align={flushright,nothyphenated,verytolerant},before={},after={}]{
+$2435$\\
+$247$\\
+\underbar{$+1413$}\\
+$4095$\\
+}}
+%}}
+\stopformula
+
+Az összeadást a legkisebb helyi értékű jegyenél kezdjük: $3+7+5=15$.
+Az eredmény $5$ egyesét leírjuk az egyesek alá, $1$ tizesét pedig a tízesekhez adjuk hozzá: $1+1+4+3=9$.
+A százasok összege: $4+2+4=10$, tehát a százasok oszlopa alá $0$-t írunk, és az $1$ ezrest az ezresekhez adjuk hozzá: $1+1+2=4$.
+A $4$-et az ezresek alá írjuk. 
+A három adott többjegyű szám összege tehát 4095.
+Az összeadást felülről lefelé is végezzük el, mert számításunk helyességét így ellenőrizhetjük.
+
+15\,m vörösréz huzalból elhasználtunk 9\,m-t. Hány méter maradt?
+
+Annyi maradt, amennyivel több a 15\,m, mint a 9\,m, ennek matematikai írásmódja: $15-9=6$ (olv.: tizenöt {\em mínusz} kilenc egyenlő hattal).
+Ez a művelet a kivonás, műveleti jele: $-$.
+
+Azt a számot kerestük, amelyhet 9-hez adva összeül 15-öt kapunk.
+A kivonás az összeadás fordított művelete. Kivonásnál ismert az egyik összeadandó és az összeg és keressük a másik összeadandót. Az összeget {\em kisebbítendőnek}, az ismert összeadandót {\em kivonandónak}, az ismeretlen összeadandót pedig {\em különbségnek} vagy {\em maradéknak} nevezzük.
+
+\startformula \startmathalignment[n=1]
+\NC \text{kisebbítendő} - \text{kivonandó} = \text{különbség} \NR[+]
+\NC \text{kisebbítendő} - \text{kivonandó} = \text{maradék} \NR[+]
+\stopmathalignment \stopformula
+
+A kivonás helyes elvégzésének próbája az összeadás:
+
+\startformula \text{kivonandó} + \text{különbség} = \text{kisebbítendő} \stopformula
+
+Fontos tulajdonsága a kivonásnak, hogy a különbség értéke nem változik, ha a kisebbítendőhöz és a kivonandóhoz {\em ugyanazt a számot hozzáadjuk, vagy mindkettőből ugyanazt kivonjuk}.
+
+\startformula \startmathalignment[n=1]
+\NC 13-11=2 \NR[+]
+\NC (13+3)-(11+3)=16-14=2 \NR[+]
+\NC (13-3)-(11-3)=10-8=2 \NR[+]
+\stopmathalignment \stopformula
+
+A kisebbítendő növelésével ill{.} csökkentésével a különbség ugyanannyival nő ill{.} csökken. A kivonandó növelésével a különbség ugyanannyival csökken, csökkentésével ugyanannyival nő.
+
+Több számjegyű számok kivonását úgy végezzük el, hogy a számokat helyi értéküknek megfelelően egymás alá írjuk és a kivonást a legkisebb helyi értékű jegynél kezdjük:
+
+\startformula
+%{\framed[width=\textwidth,frame=off,align=middle,after={\blank}]{
+{\framed[frame=off,align={flushright,nothyphenated,verytolerant},before={},after={}]{
+$5832$\\
+\underbar{$-3521$}\\
+$2311$\\
+}}
+%}}
+\stopformula
+
+1 meg 1 az 2 (leírjuk az 1-et), 2 meg 1 az 3 (leírjuk az 1-et), 5 meg 3 az nyolc (leírjuk a 3-at), 3 meg 2 az öt (leírjuk az 2-t). A különbség: 2311.
+
+Ellenőrzés: $2311+3521=5832$.
+
+Amikor a kisebbítendő valamelyik számjegye kisebb, mint a kivonandó ugyanolyan helyi értékű számjegye, akkor felhasználjuk a már említett törvényt, amely szerint a különbség nem változik, ha a kisebbítendőt és a kivonandót ugyanazzal a számmal növeljük.
+
+\startformula
+%{\framed[width=\textwidth,frame=off,align=middle,after={\blank}]{
+{\framed[frame=off,align={flushright,nothyphenated,verytolerant},before={},after={}]{
+$3762$\\
+\underbar{$-1835$}\\
+$1927$\\
+}}
+%}}
+\stopformula
+
+Mivel 2 egyesből 5 egyest nem vonhatunk ki, a kisebbítendőhöz 10 egyest hozzáadunk, így 12 egyesünk lesz, és hogy a különbség ne változzék, a kivonandóhoz ugyancsak 10 egyest, de 1 tízes alakjában hozzáadunk a kivonandó tízeseihez is. Hasonlóan járunk el a százasoknál is, ahol 10 százassal (1 ezressel) növeljük a kisebbítendőt és 1 ezressel a kivonandót. A kivonást tehát így végezzük: 5 meg 7 az 12 (leírjuk a 7-et), 1 meg 3 az 4 meg 2 az 6 (leírjuk a 2-t), 8 meg 9 az 17 (leírjuk a 9-et), 1 meg 1 az 2, 2 meg 1 az 3 (leírjuk az egyet). A különbség vagy maradék: 1927. 
+
+Próba: ha a maradékot a kivonandóhoz hozzáadva a kisebbítendőt kapjuk, helyes az eredményünk.
+
+\startformula
+%{\framed[width=\textwidth,frame=off,align=middle,after={\blank}]{
+{\framed[frame=off,align={flushright,nothyphenated,verytolerant},before={},after={}]{
+$1835$\\
+\underbar{$+1927$}\\
+$3762$\\
+}}
+%}}
+\stopformula
+
+Az $\mathbb{N}$ (természetes számok) számhalmazban a kivonást csak akkor végezhetjük el, ha a $\text{kisebbítendő}\geq\text{kivonandó}$ feltétel teljesül.
+
+\stopsubject
+
+\stopbodymatter
+\stopproduct
+\stopproject
