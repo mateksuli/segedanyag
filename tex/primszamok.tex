@@ -1,0 +1,283 @@
+\startproject iras
+\mainlanguage[hu]
+\setupalign[
+  justified,
+  nothanging,
+  nohz,
+  hyphenated,
+  morehyphenated,
+  tolerant,
+]
+\setupinterlinespace[height=0.75,depth=0.25]
+\setuplayout[
+  grid=no,
+  location=middle,
+]
+\setupformulas[align=middle]
+%\setupmathalignment[grid=no]
+
+\def\PagenumberingCommand#1{\doifnot\pagenumber1{#1}}
+\setuppagenumbering[
+  location={footer,middle},
+  command=\PagenumberingCommand,
+]
+\setuppapersize[A4]
+\setuplayout[
+    backspace=30mm,
+    width=150mm,
+    topspace=30mm,
+    header=0mm,
+    footer=15mm,
+    footerdistance=0mm,
+    bottom=0mm,
+    bottomdistance=0mm,
+    height=247mm
+]
+
+% Betűkészlet
+%\setupbodyfont[libertinus,12pt]
+\setupbodyfont[12pt]
+
+% Vékony spácium bizonyos karakterek előtt (:;?!)
+\definecharacterspacing [magyarpunctuation]
+\setupcharacterspacing [magyarpunctuation] ["0021] [left=.1,alternative=1] % ! % strip preceding space(char)
+\setupcharacterspacing [magyarpunctuation] ["003A] [left=.1,alternative=1] % : % strip preceding space(char)
+\setupcharacterspacing [magyarpunctuation] ["003B] [left=.1,alternative=1] % ; % strip preceding space(char)
+\setupcharacterspacing [magyarpunctuation] ["003F] [left=.1,alternative=1] % ? % strip preceding space(char)
+
+% A magyar nyelv beállításai
+\startsetups[magyar]
+  % Vékony spácium bizonyos karakterek előtt (:;?!)
+  \setcharacterspacing[magyarpunctuation]
+  \setupindenting[%
+    yes,% A bekezdéseket behúzással kezdjük.
+    %next,% Az első bekezdés nincs behúzva.
+    medium% Közepes méretű (átmeneti megoldás: igazából a mérete 24 cicerós sorig 1 kvirt, nagyobbbnál 2 kvirt kellene legyen -> TENNIALÓ)
+  ]
+\stopsetups
+
+\setuplanguage[hu][%
+  setups=magyar,% Érvényesíti a fent megadott beállításokat.
+  spacing=packed% Frenchspacing (Gyurgyák 319. o.: egyenletes szóközök).
+                % http://wiki.contextgarden.net/French_spacing).
+]
+
+% TENNIVALÓ: csak magyar nyelvre
+% Idézetek (Gyurgyák, 86--87. o.).
+\definedelimitedtext[quote][location=text]
+\setupdelimitedtext[quote:1][
+  left={\lowerleftdoubleninequote},
+  right={\upperrightdoubleninequote},
+  spaceafter=0
+]
+\setupdelimitedtext[quote:2][
+  left={\rightguillemot\nobreak\hskip-.07em},
+  right={\kern-0.03em\leftguillemot},
+  spaceafter=0
+]
+\setupdelimitedtext[quote:3][
+  left={\upperleftsingleninequote},
+  right={\upperrightsingleninequote},
+  spaceafter=0
+]
+
+\definebodyfontenvironment[default][em=italic]
+
+\defineframedtext[kerdes][align=center,offset=0.5ex,style=italic,width=\dimexpr0.8\dimexpr\makeupwidth]
+
+\defineframedtext[kivonat][offset=0.5ex, frame=off,style=italic,width=\dimexpr0.8\dimexpr\makeupwidth]
+
+\definehead[feladat][subsubsubject]
+\setuphead[feladat][
+    number=no,
+    textdistance=0pt,
+    alternative=text,
+    style=bf,
+    commandafter={\hbox{.\quad}},
+]
+
+\definebar[mathubar][underbar]  % enélkül esetleg elcsúszik az aláhúzás
+
+%\showgrid[all]
+
+\definehead[cim][chapter]
+\setuphead[cim][number=no,align=middle,after={},]
+
+\startproduct iras
+\startbodymatter
+
+\cim{Prímszámok, prímtényezőkre bontás}
+
+\startkivonat
+Az alábbi szöveg Péter Rózsa {\em Játék a végtelennel} című könyvéből származik. Néhány kisebb módosítás, kiegészítés viszont történt.
+\stopkivonat
+
+\startsubject[title=Prímszámok]
+
+A hinduk ősidőktől fogva kitűnő matematikusok, és sajátos képességeik vannak ezen a téren.
+Mikor egyszer Hardy és Rámánudzsan Londonban taxin utazott, Hardy a taxi távozása után vette észre, hogy aktatáskáját a kocsiban felejtette.
+Kéziratok lévén a táskában, ez kétségbe ejtette, de Rámánudzsan megnyugtatta, hogy a taxi száma 1729.
+Hardy igen örült ennek, de nem hagyta nyugodni a kérdés, hogyan lehetett megjegyezni egy ilyen érdektelen számot.
+Nem érdektelen ez a szám, felelte Rámánudzsan: ez a legkisebb olyan egész szám, amely kétféleképpen bontható fel két köbszám összegére, hiszen $10^3+9^3$ is és $12^3+1^3$ is 1729.
+
+A hinduknak még a négyjegyű számok is ilyen külön sajátságokkal felruházott személyes ismerőseik.
+Nálunk a kis számokat kezelik ilyen individuumok módjára: a 2-es nem a sok szürke szám egyike, hanem sok oldalról megismert különálló egyéniség: ő az első páros szám, $1+1$, 4-nek a fele stb. 
+De akár 10-ig színezzük így a számokat, akár olyan messzeségekig, mint a hinduk, mindez csak szerény kis töredéke a végtelen számsornak, amely ezen túl szürkén hömpölyög tovább.
+
+
+
+Tudjuk ugyan, hogy vannak páros számok, igen, minden második szám páros:
+\startformula
+1, \mathubar{2}, 3, \mathubar{4}, 5, \mathubar{6}, 7, \mathubar{8}, 9, \mathubar{10}, 11, \mathubar{12}, \dots
+\stopformula
+
+ugyanígy minden harmadik szám osztható 3-mal:
+\startformula
+1, 2, \mathubar{3}, 4, 5, \mathubar{6}, 7, 8, \mathubar{9}, 10, 11, \mathubar{12}, \dots
+\stopformula
+
+minden negyedik szám 4-gyel:
+\startformula
+1, 2, 3, \mathubar{4}, 5, 6, 7, \mathubar{8}, 9, 10, 11, \mathubar{12}, \dots
+\stopformula
+
+s. í. t., ezek azonban csak kisebb-nagyobb hullámokat jelentenek, melyek, ha egyszer megindultak, egyhangúan, egyformán gördülnek tovább.
+Valóban nincs semmi váratlan, semmi egyéni szeszély, ami felélénkíthetné ezt az egyhangúságot?
+
+De van: a prímszámok szeszélyes, szabályokba nem szorítható eloszlása. Emlékezzünk csak az oszthatóságra: 
+
+\startformula \startmathalignment
+\NC \text{10 összes osztói: } \NC 1, 2, 5, 10,\NR[+]
+\NC \text{12 összes osztói: } \NC 1, 2, 3, 4, 6, 12, \NR[+]
+\NC \text{közben } \text{11 összes osztói: } \NC 1, 11.\NR[+]
+\stopmathalignment \stopformula
+
+1-gyel és önmagával minden szám osztható; vannak számok, amelyek e kettőn kívül semmi mással: ilyen például a 11. Ezeket a számokat nevezik törzsszámoknak vagy prímszámoknak.
+
+Az 1 e szempontból rendellenesen viselkedik; csak egy osztója van: 1, és ez egyszersmind önmaga. Ezért 1-et nem szokás a prímszámok közé sorolni. Az 1 neve {\em egység}.
+Eszerint a legkisebb prímszám a 2, ez egyszersmind az egyetlen páros prímszám, mert minden páros szám osztható 2-vel és ez a szám prímszám voltát csak akkor nem rontja el, ha ez a 2-es osztó maga a szám.
+
+Jelentőséget az ad a prímszámoknak, hogy minden más szám ezekből az építőkövekből rakható össze; éppen ezért nevezik a többi számot összetett számnak. Pontosabban úgy fogalmazható ez meg, hogy minden összetett szám csupa prímszám szorzataként állítható elő.
+
+Próbáljuk például 60-at szorzatként írni fel:
+\startformula
+60 = 6 \cdot 10
+\stopformula
+
+Itt 6 és 10 is tovább bontható tényezőkre:
+
+\startformula
+6=2\cdot 3 \quad\text{és}\quad 10=2 \cdot 5,
+\stopformula
+
+ezeket beírva 6 és 10 helyére:
+
+\startformula
+60=2 \cdot 3 \cdot 2 \cdot 5
+\stopformula
+
+és itt már minden tényező prímsszám.
+
+Másképp is hozzáfoghattunk volna ehhez, hiszen már láttuk, hogy 60-at nagyon sokféleképpen lehet két szám szorzataként felírni.
+Ha ebből indulunk ki:
+
+\startformula \startmathalignment
+\NC \null \NC 60=4\cdot 15, \NR[+]
+\NC \text{itt}\quad\NC 4=2\cdot 2 \quad\text{és}\quad 15=3 \cdot 5, \NR[+]
+\NC \text{tehát}\quad \NC 60=2 \cdot 2 \cdot 3 \cdot 5, \NR[+]
+\stopmathalignment \stopformula
+
+ha pedig ezt a felbontást választjuk:
+
+\startformula \startmathalignment[n=8,align={right,left,left,left,right,left,left,left}]
+\NC \NC 60\NC=2\cdot 30, \NR[+]
+\NC \text{akkor}\quad\NC 30\NC=5\cdot 6 \quad\NC\text{és itt}\quad \NC6\NC=2 \cdot 3, \quad\NC\text{tehát}\quad 30\NC=5 \cdot 2 \cdot 3, \NR[+]
+\NC \text{vagy}\quad\NC 30\NC=2\cdot 15 \quad\NC\text{és itt}\quad \NC15\NC=3 \cdot 5, \quad\NC\text{tehát}\quad 30\NC=2 \cdot 3 \cdot 5, \NR[+]
+\NC \text{vagy}\quad\NC 30\NC=3\cdot 10 \quad\NC\text{és itt}\quad \NC10\NC=2 \cdot 5, \quad\NC\text{tehát}\quad 30\NC=3 \cdot 2 \cdot 5; \NR[+]
+\stopmathalignment \stopformula
+
+látjuk tehát, hogy 30 mindenképpen a 2, 3 és 5 prímszámok szorzatára bomlik; e szorzatot írva 30 helyébe
+
+\startformula
+60=2 \cdot 2 \cdot 3 \cdot 5.
+\stopformula
+
+Bármi módon fogunk is hozzá, csak ugyanazon prímszámokra esik szét 60, legfeljebb más sorrendben lépnek fel ezek. Rendbe szedve és az egyenlő tényezők szorzatát hatványalakban írva
+
+\startformula
+60=2^{2} \cdot 3 \cdot 5.
+\stopformula
+
+Ugyanilyen könnyű bármely más összetett számot is felbontani ,,prímtényezőire’’ (és be lehet bizonyítani, hogy mindig csak egyféle felbontásra juthatunk).
+Ha első pillanatra megakadunk azon, hogyan is fogjunk hozzá, gondoljuk meg, hogy a szám legkisebb osztója (1-en kívül) biztosan prímszám, mert ha az is összetett szám volna, akkor kellene önmagánál kisebb osztójának lenni, és ez persze az eredeti számban is megvolna maradék nélkül.
+Tehát mindig a legkisebb osztót keresve, szépen legöngyölíthetők bármely szám prímtényezői, például:
+
+\startformula \startmathalignment[n=2,align={right,left}]
+\NC 90\NC=2 \,\, \cdot \,\, 45 \NR
+\NC   \NC=2\cdot\overbrace{3\,\cdot\,15} \NR
+\NC   \NC=2\cdot 3\cdot\overbrace{3\cdot 5} \NR
+\stopmathalignment \stopformula
+
+Egy ilyen felbontás jól bevilágít a szám szerkezetébe, pl. kiolvasható belőle, hogy 90 osztói 1-en kívül:
+\startformula \startmathalignment[n=2,align={left,left}]
+\NC \text{egytényezősök: } \NC 2, 3, 5, \NR
+\NC \text{kéttényezősök: } \NC 2\cdot3=\mathubar{6},\quad 2\cdot5=\mathubar{10},\quad 3\cdot3=\mathubar{9},\quad 3\cdot5=\mathubar{15}, \NR
+\NC \text{háromtényezősök: } \NC 2\cdot3\cdot3=\mathubar{18},\quad 2\cdot3\cdot5=\mathubar{30},\quad 3\cdot3\cdot5=\mathubar{45}, \NR
+\NC \text{négytényezős: } \NC 2\cdot3\cdot3\cdot5=\mathubar{90}. \NR
+\stopmathalignment \stopformula
+
+Tehát érdemes a számok építőköveivel közelebbről is megismerkedni.
+Próbáljuk felírni rendre a prímszámokat.
+Már tudjuk, hogy a legkisebb prímszám a 2, és innen kezdve a páros számokat nyugodtan át lehet ugrani, hiszen ezek mind oszthatók 2-vel.
+3 is, 5 is, 7 is prímszám; az ember szeretné rámondani, hogy a 9 is, de ez nem igaz, hiszen 9 osztható 3-mal.
+Most azt gondolnók, hogy innen kezdve ritkulnak a prímszámok; ez megint nem igaz, mert 11 és 13 is prímszám.
+
+Még a régi görögöktől maradt ránk egy szellemes ötlet, amely tévedés lehetősége nélkül, gépiesen állítja elő ezt a szeszélyes sorozatot: az ún{.} Eratosztenész-féle rosta.
+Írjuk fel a számokat 2-től 50-ig; e sorozat első tagja látatlanban is biztosan prímszám, hiszen minden valódi osztója kisebb volna nála s így (1-en kívül) előtte szerepelne a sorozatban, előtte azonban nincs semmi. Most nézzük meg, hogy mi ez az első szám: 2. Minden második szám 2-nek többszöröse és így 2 kivételével nem prímszám, tehát innen kezdve húzzunk ki minden második számot:
+
+
+% https://tex.stackexchange.com/a/129129/50554
+\defineframed
+    [bekarikazott]
+    [
+      corner=round,
+      location=low,
+      loffset=0.1em,
+      roffset=0.1em,
+      rulethickness=0.5mm,
+    ]
+
+
+\startuniqueMPgraphic{athuzott a}
+pickup pencircle scaled 0.5mm ;
+path p ; p := (0pt+3pt,0pt+3pt)--(\overlaywidth-3pt,\overlayheight-3pt) ;
+draw p withcolor black ;
+\stopuniqueMPgraphic
+\defineoverlay[athuzott][\uniqueMPgraphic{athuzott a}]
+
+\def\athuzott#1{\noindent\inframed[frame=off,background=athuzott,location=low]{#1} }
+
+\startformula
+\bekarikazott{2}, 3, \athuzott{4}, 5, \athuzott{6}, 7, \athuzott{8}, 9, \athuzott{10}, 11, \athuzott{12}
+\stopformula
+
+A legelső szám, ami 2 után épségben maradt, ismét csak prímszám lehet, hiszen csak előtte szereplő számnak lehetne többszöröse, előtte pedig csak olyan szám van, melynek többszöröseit kihúztuk.
+Nézzük meg ezt a számot: 3.
+Minden harmadik szám 3-nak többszöröse, tehát húzzunk ki innen kezdve minden harmadik számot (nem baj, hogy így egyes számokat kétszeresen is áthúzunk):
+
+\startformula
+\bekarikazott{2}, \bekarikazott{3}, \athuzott{4}, 5, \athuzott{6}, 7, \athuzott{8}, \athuzott{9}, \athuzott{10}, 11, \athuzott{12}
+\stopformula
+
+Ha 12-ig bezárólag vagyunk kíváncsiak a prímszámokra, akkor tovább már nem is kell mennünk, mert az első fennmaradó szám 5, és ennek a 3-szorosánál nagyobb többszörösei már túl vannak 12-n, kisebb többszörösei pedig már mind a kihúzott számok közt szerepelnek. 12-ig tehát a következő prímszámokat találtuk: $ 2, 3, 5, 7, 11$.
+
+Gépet is lehetne szerkeszteni, mely az itt adott utasítást végrehajtja, és így hibátlanul ontja a prímszámokat egy bizonyos határig.
+Beszéltünk is róla, hogy ezzel a módszerrel keresik a prímszámokat a szuperszámítógépekkel.
+Ez azonban mit sem változtat azon, hogy a prímszámok minden határon túl a legszeszélyesebben bukkannak fel újra meg újra.
+
+Így például meg lehet mutatni, hogy bármilyen nagy réseket találhatunk köztük, ha elég messzire megyünk a számsorban. Például egy legalább 6 egységnyi rést, azaz hat egymást követő olyan számot, amelyek egyike sem prímszám, adnak a következő műveletek eredményei:
+\stopsubject
+
+\stopbodymatter
+\stopproduct
+\stopproject
