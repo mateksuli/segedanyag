@@ -85,7 +85,8 @@
 
 \defineframedtext[kerdes][align=center,offset=0.5ex,style=italic,width=\dimexpr0.8\dimexpr\makeupwidth]
 
-\defineframedtext[kivonat][offset=0.5ex, frame=off,style=italic,width=\dimexpr0.8\dimexpr\makeupwidth]
+\defineframedtext[kivonat][frame=off,bodyfont=small,width=\makeupwidth]
+
 
 \definehead[feladat][subsubsubject]
 \setuphead[feladat][
@@ -103,22 +104,25 @@
 \definehead[cim][chapter]
 \setuphead[cim][number=no,align=middle,after={},]
 
+% lábjegyzet száma a szövegtükrön belül
+\setupnotation[footnote][alternative=text] 
+
 \startproduct iras
 \startbodymatter
 
-\cim{Prímszámok, prímtényezőkre bontás}
+\cim{Prímszámok}
 
 \startkivonat
-Az alábbi szöveg Péter Rózsa {\em Játék a végtelennel} című könyvéből származik. Néhány kisebb módosítás, kiegészítés viszont történt.
+Az alábbi szöveg főként Péter Rózsa {\em Játék a végtelennel} című könyvéből származik. Néhány kisebb módosítás, kiegészítés viszont történt. A taxis történet a Wikipedia Rámánudzsanról szóló szócikkéből másoltam be. A prímtényezőkre bontás módját Obádovics J{.} Gyula {\em Matematika} című könyvéből vettem.
 \stopkivonat
 
-\startsubject[title=Prímszámok]
+\startsubject[title=Mik azok a prímszámok?]
 
 A hinduk ősidőktől fogva kitűnő matematikusok, és sajátos képességeik vannak ezen a téren.
 Mikor egyszer Hardy és Rámánudzsan Londonban taxin utazott, Hardy a taxi távozása után vette észre, hogy aktatáskáját a kocsiban felejtette.
 Kéziratok lévén a táskában, ez kétségbe ejtette, de Rámánudzsan megnyugtatta, hogy a taxi száma 1729.
 Hardy igen örült ennek, de nem hagyta nyugodni a kérdés, hogyan lehetett megjegyezni egy ilyen érdektelen számot.
-Nem érdektelen ez a szám, felelte Rámánudzsan: ez a legkisebb olyan egész szám, amely kétféleképpen bontható fel két köbszám összegére, hiszen $10^3+9^3$ is és $12^3+1^3$ is 1729.
+Nem érdektelen ez a szám, felelte Rámánudzsan: ez a legkisebb olyan egész szám, amely kétféleképpen bontható fel két köbszám összegére.
 
 A hinduknak még a négyjegyű számok is ilyen külön sajátságokkal felruházott személyes ismerőseik.
 Nálunk a kis számokat kezelik ilyen individuumok módjára: a 2-es nem a sok szürke szám egyike, hanem sok oldalról megismert különálló egyéniség: ő az első páros szám, $1+1$, 4-nek a fele stb. 
@@ -157,6 +161,9 @@ De van: a prímszámok szeszélyes, szabályokba nem szorítható eloszlása. Em
 Az 1 e szempontból rendellenesen viselkedik; csak egy osztója van: 1, és ez egyszersmind önmaga. Ezért 1-et nem szokás a prímszámok közé sorolni. Az 1 neve {\em egység}.
 Eszerint a legkisebb prímszám a 2, ez egyszersmind az egyetlen páros prímszám, mert minden páros szám osztható 2-vel és ez a szám prímszám voltát csak akkor nem rontja el, ha ez a 2-es osztó maga a szám.
 
+
+\startsubject[title=Prímtényezőkre bontás]
+
 Jelentőséget az ad a prímszámoknak, hogy minden más szám ezekből az építőkövekből rakható össze; éppen ezért nevezik a többi számot összetett számnak. Pontosabban úgy fogalmazható ez meg, hogy minden összetett szám csupa prímszám szorzataként állítható elő.
 
 Próbáljuk például 60-at szorzatként írni fel:
@@ -178,7 +185,7 @@ ezeket beírva 6 és 10 helyére:
 
 és itt már minden tényező prímsszám.
 
-Másképp is hozzáfoghattunk volna ehhez, hiszen már láttuk, hogy 60-at nagyon sokféleképpen lehet két szám szorzataként felírni.
+Másképp is hozzáfoghattunk volna ehhez, hiszen a 60-at nagyon sokféleképpen lehet két szám szorzataként felírni.
 Ha ebből indulunk ki:
 
 \startformula \startmathalignment
@@ -202,13 +209,7 @@ látjuk tehát, hogy 30 mindenképpen a 2, 3 és 5 prímszámok szorzatára boml
 60=2 \cdot 2 \cdot 3 \cdot 5.
 \stopformula
 
-Bármi módon fogunk is hozzá, csak ugyanazon prímszámokra esik szét 60, legfeljebb más sorrendben lépnek fel ezek. Rendbe szedve és az egyenlő tényezők szorzatát hatványalakban írva
-
-\startformula
-60=2^{2} \cdot 3 \cdot 5.
-\stopformula
-
-Ugyanilyen könnyű bármely más összetett számot is felbontani ,,prímtényezőire’’ (és be lehet bizonyítani, hogy mindig csak egyféle felbontásra juthatunk).
+Bármi módon fogunk is hozzá, csak ugyanazon prímszámokra esik szét 60, legfeljebb más sorrendben lépnek fel ezek. Ugyanilyen könnyű bármely más összetett számot is felbontani ,,prímtényezőire’’ (és be lehet bizonyítani, hogy mindig csak egyféle felbontásra juthatunk).
 Ha első pillanatra megakadunk azon, hogyan is fogjunk hozzá, gondoljuk meg, hogy a szám legkisebb osztója (1-en kívül) biztosan prímszám, mert ha az is összetett szám volna, akkor kellene önmagánál kisebb osztójának lenni, és ez persze az eredeti számban is megvolna maradék nélkül.
 Tehát mindig a legkisebb osztót keresve, szépen legöngyölíthetők bármely szám prímtényezői, például:
 
@@ -226,7 +227,49 @@ Egy ilyen felbontás jól bevilágít a szám szerkezetébe, pl. kiolvasható be
 \NC \text{négytényezős: } \NC 2\cdot3\cdot3\cdot5=\mathubar{90}. \NR
 \stopmathalignment \stopformula
 
-Tehát érdemes a számok építőköveivel közelebbről is megismerkedni.
+A prímtényezőkre bontás javasolt módja az, hogy az adott számot elosztjuk a legkisebb számmal, amelyik a számnak az osztója.
+A hányadost ismét elosztjuk a benne található legkisebb prímszámmal és ezt addig ismételjük, amíg a hányados 1 lesz.
+Az így előállított prímszámok az adott szám prímtényezői.
+Az eljárás áttekinthető, ha az adott számot leírjuk és a szám mellé húzunk egy függőleges vonalat, majd mellé írjuk az első prímszámosztót. A hányadost a szám alá írjuk, s az előbbi lépést addig ismételjük, míg hányadosul 1-et nem kapunk.
+
+Például határozzuk meg ily módon 1512 prímtényezőit:
+
+\starttabulate[|Mrw(0.5\textwidth)||Mlw(0.5\textwidth)|][unit=0pt]
+\NC \hbox{1512 }\VL\NC\hbox{\ 2} \NR
+\NC \hbox{756 }\VL\NC\hbox{\ 2} \NR
+\NC \hbox{378 }\VL\NC\hbox{\ 2} \NR
+\NC \hbox{189 }\VL\NC\hbox{\ 3} \NR
+\NC \hbox{63 }\VL\NC\hbox{\ 3} \NR
+\NC \hbox{21 }\VL\NC\hbox{\ 3} \NR
+\NC \hbox{7 }\VL\NC\hbox{\ 7} \NR
+\NC \hbox{1 }\VL\NC \NR
+\stoptabulate
+
+\noindent Az adott szám prímszámtényezőkre bontva tehát:
+\startformula
+1512 = 2\cdot2\cdot2\cdot3\cdot3\cdot3\cdot7.
+\stopformula
+
+Mivel gyakran előfordul több közös tényező, ezért a prímtényezős alakban való felírás rövidíthető, ha az egyenlő tényezőket {\em hatvány} kifejezésként írjuk fel.
+Erre a következő jelölés szolgál: $2\cdot2\cdot2 = 2^3$ (olv{.}: kettő a harmadikon vagy kettő a köbön); $3\cdot3\cdot3 = 3^3$. A közös tényezőt, pl{.} a 2-t vagy a 3-at a hatvány {\em alapjának}, a fölé írt számot, amely megmutatja, hogy az alapot hányszor kell tényezőül venni, {\em kitevőnek} nevezzük. Ezzel a rövidített írásmóddal az 1512 prímtényezős alakja:
+\startformula
+1512 = 2^3\cdot3^3\cdot7.
+\stopformula
+Most már fel tudjuk írni szép formában a már korábban felbontott 60-as számot is:
+\startformula
+60=2^{2} \cdot 3 \cdot 5.
+\stopformula
+Olvasd: hatvan egyenlő kettő a másodikon\footnote{vagy kettő a négyzeten} szorozva hárommal szorozva öttel.
+
+Ha ezek után leírom Hardy és Rámánudzsan taxijának számát két köbszám összegeként kétféle módon, akkor ezt a felírást már tudjuk értelmezni:
+\startformula
+1729 = 10^3+9^3\quad\text{és}\quad 1729 = 12^3+1^3.
+\stopformula
+
+
+
+\startsubject[title=Eratosztenész szitája]
+
 Próbáljuk felírni rendre a prímszámokat.
 Már tudjuk, hogy a legkisebb prímszám a 2, és innen kezdve a páros számokat nyugodtan át lehet ugrani, hiszen ezek mind oszthatók 2-vel.
 3 is, 5 is, 7 is prímszám; az ember szeretné rámondani, hogy a 9 is, de ez nem igaz, hiszen 9 osztható 3-mal.
@@ -271,11 +314,79 @@ Minden harmadik szám 3-nak többszöröse, tehát húzzunk ki innen kezdve mind
 
 Ha 12-ig bezárólag vagyunk kíváncsiak a prímszámokra, akkor tovább már nem is kell mennünk, mert az első fennmaradó szám 5, és ennek a 3-szorosánál nagyobb többszörösei már túl vannak 12-n, kisebb többszörösei pedig már mind a kihúzott számok közt szerepelnek. 12-ig tehát a következő prímszámokat találtuk: $ 2, 3, 5, 7, 11$.
 
-Gépet is lehetne szerkeszteni, mely az itt adott utasítást végrehajtja, és így hibátlanul ontja a prímszámokat egy bizonyos határig.
-Beszéltünk is róla, hogy ezzel a módszerrel keresik a prímszámokat a szuperszámítógépekkel.
+Gépet is lehetne szerkeszteni, mely az itt adott utasítást végrehajtja, és így hibátlanul ontja a prímszámokat egy bizonyos határig.\footnote{Beszéltünk is róla, hogy ezzel a módszerrel keresik a prímszámokat a szuperszámítógépekkel.}
 Ez azonban mit sem változtat azon, hogy a prímszámok minden határon túl a legszeszélyesebben bukkannak fel újra meg újra.
 
 Így például meg lehet mutatni, hogy bármilyen nagy réseket találhatunk köztük, ha elég messzire megyünk a számsorban. Például egy legalább 6 egységnyi rést, azaz hat egymást követő olyan számot, amelyek egyike sem prímszám, adnak a következő műveletek eredményei:
+\startformula \startmathalignment[n=2,align={right,left}]
+\NC \mathubar{2}\cdot3\cdot4\cdot5\cdot6\cdot7+2,\quad  \NC 2\cdot\mathubar{3}\cdot4\cdot5\cdot6\cdot7+3,\NR
+\NC 2\cdot3\cdot\mathubar{4}\cdot5\cdot6\cdot7+4,\quad  \NC 2\cdot3\cdot4\cdot\mathubar{5}\cdot6\cdot7+5,\NR
+\NC 2\cdot3\cdot4\cdot5\cdot\mathubar{6}\cdot7+6,\quad  \NC 2\cdot3\cdot4\cdot5\cdot6\cdot\mathubar{7}+7,\NR
+\stopmathalignment \stopformula
+mert ezek valóban egymást követő számok: mindegyik éppen 1-gyel több az előzőnél, és egyik sem prímszám, hiszen $2\cdot3\cdot4\cdot5\cdot6\cdot7$ minden egyes tényezőjével osztható, tehát az első közülük olyan összeg, melynek mindkét tagja osztható 2-vel, a második hasonló okokból 3-mal osztható, a harmadik 4-gyel, a negyedik 5-tel, az ötödik 6-tal és a hatodik 7-tel.
+Kiszámítva
+\startformula
+2\cdot3\cdot4\cdot5\cdot6\cdot7=5040,
+\stopformula
+tehát itt a következő hat számról van szó:
+\startformula
+5042, 5043, 5044, 5045, 5046, 5047.
+\stopformula
+Ezek elég nagy számok, elég messze kell mennünk a számsorban, hogy ezen a módon 6-tagú rést találjunk a prímszámok közt (persze lehetséges, hogy már jóval előbb van közöttük ilyen rés).\footnote{Valójában elég venni a $2\cdot3\cdot5\cdot7+2$-t és az azt követő 5 számot. De ez a módszer sem adja meg az első legalább 6 egymást követő összetett számot ($90, 91, \dots, 96$).}
+De ha nem sajnálunk jó messzire menni, legalább 100 tagú rést is találhatunk ugyanígy, ha 2-től 101-ig terjedő számok
+\startformula
+2\cdot3\cdot4\cdot5\cdot\cdot\cdot101,
+\stopformula
+szorzatához adunk hozzá sorra 2-t, 3-at, \dots\ végül 101-et.
+Ezen a módon találhatunk bármilyen hosszú réseket is.
+
+Mindamellett, ameddig csak megvizsgálták a számsort, újra meg újra, bármilyen hosszú réseken túl is, találtak szomszédos páratlan számokat, amelyek prímszámnak bizonyultak, mint például a számsor elején 11 és 13, vagy 29 és 31.
+A matematikusok azt sejtik, hogy ilyen ,,ikerprímszámok’’ minden távolságban előfordulnak, a számsor megvizsgált részén túl is; de ezt ilyen általánosságban mindmáig nem sikerült bebizonyítani.
+
+
+\startsubject[title=Mennyi prímszám van?]
+
+Dehát vannak-e egyáltalán prímszámok minden távolságban?
+Nemcsak a számsor elejét színezik-e ezek egy darabon?
+Erre a kérdésre már van válaszunk, méghozzá 2000 év óta: Euklidész közölt egy igen elegáns bizonyítást arra, hogy végtelen sok törzsszám van.
+
+Bárhol is mondja valaki, hogy itt a vége, nem futhat el véle, mert meg tudom mutatni, hogy van prímszám azon túl is.
+
+Elég ezt egy esetben megmutatni; minden más esetben ugyanígy megy. 
+Csak azt kell ehhez meggondolnunk, hogy 2-vel minden második szám osztható, 3-mal minden harmadik s í{.} t{.}, tehát egy 2-vel osztható szám közvetlen rákövetkezője nem lehet osztható 2-vel, egy 3-mal osztható szám közvetlen rákövetkezője nem lehet osztható 3-mal s í{.} t{.}
+Ha mármost valaki azt állítaná, hogy a prímszámok a következők:
+\startformula
+2,3,5,7
+\stopformula
+és itt a vége, akkor én azonnal megcáfolom, hiszen a felsorolt törzsszámokból megalkothatom a következő számot:
+\startformula
+2\cdot3\cdot5\cdot7+1.
+\stopformula
+$2\cdot3\cdot5\cdot7$ osztható 2-vel is, 3-mal is, 5-tel is, 7-tel is.
+A közvetlenül rákövetkező $2\cdot3\cdot5\cdot7+1$ szám tehát ezek egyikével sem lehet osztható.
+Dehát valamilyen prímszámmal csak oszthatónak kell lennie szegénynek, ő is csak szám, ő is prímszámokra bontható, vagy esetleg maga is prímsszám és önmagával mindenesetre osztható.
+Az illető tehát tévedett: kell lenni prímszámnak 7-en túl is.
+És ugyanígy minden prímszámon túl is.
+
+Számítsuk csak ki ezt a $2\cdot3\cdot5\cdot7+1$ számot: az eredmény 211.
+Egy kis próbálgatás megmutatja, hogy ez 1-en és önmagán kívül mással nem osztható, vagyis véletlenül törzsszám.
+Tehát ő maga az a 7-en túli törzsszám, aminek a létezését állítottam.
+Persze szó sincs róla, hogy ez a 7-et közvetlenül követő törzsszám volna: az egy pillanatig sem volt várható, hogy az egymást követő törzsszámokat ilyen szabályszerűen lehetne megszerkeszteni.
+
+Módszerünk pontosabban azt az eredményt adja, hogy 7-től legfeljebb $2\cdot3\cdot5\cdot7+1$-ig, ugyanígy 11-től legfeljebb $2\cdot3\cdot5\cdot7\cdot11+1$-ig s í{.} t{.} kell menni, hogy újabb törzsszámot találjunk.
+Ezek azonban elég nagy távolságok; nem lehetne-e szűkebb határok közt törzsszámokat találni?
+
+Sokan foglalkoztak ezzel a kérdéssel.
+Hogy csak egy szép eredményt említsek: Csebisev orosz matematikus bebizonyította, hogy 2-től kezdve bármely szám és a kétszerese között is mindig van prímszám:
+\startformula \startmathalignment[n=2,align={right,left}]
+\NC \text{2 és 4 közt} \quad\NC\quad \text{3} \NR
+\NC \text{3 és 6 közt} \quad\NC\quad \text{5} \NR
+\NC \text{4 és 8 közt} \quad\NC\quad \text{5 is, 7 is} \NR
+\NC \text{5 és 10 közt} \quad\NC\quad \text{csak 7;} \NR
+\stopmathalignment \stopformula
+bár ebben semmi szabályszerűség sem látszik, ez mégis minden messzeségben bekövetkezik; sőt ha elég messzire megyünk, elég nagy számokat választunk, akárhány prímszám is esik a számok és kétszereseik közé.
+Íme mégis valami szabályféle a féktelennek látszó prímszámok számára: bármennyire mégsem rugaszkodhatnak el egymástól.
+
 \stopsubject
 
 \stopbodymatter
