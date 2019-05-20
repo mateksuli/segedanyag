@@ -9,6 +9,8 @@ Amennyiben valamelyik szerzői jog tulajdonos úgy érzi, hogy ez nem így van, 
 
 Javaslom, hogy az alábbi címekre kattintva töltse le és nyissa meg az Önt érdeklő PDF-et, vagy [töltsön le mindent](https://github.com/matektankor/segedanyag/archive/master.zip) és a kapott `master.zip` kicsomagolása után tartsa meg a `pdf` alkönyvtárat. Az egyes anyagokba gyors betekintést nyerhet, ha fent a listán belép a `pdf` könyvtárba.
 
+### [Mértékegység táblázatok](https://github.com/matektankor/segedanyag/raw/master/pdf/mertekegyseg_tablazatok.pdf)
+
 ### [Összeadás és kivonás](https://github.com/matektankor/segedanyag/raw/master/pdf/osszeadas_kivonas.pdf)
 
 ### [Prímszámok](https://github.com/matektankor/segedanyag/raw/master/pdf/primszamok.pdf)

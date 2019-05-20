@@ -1,0 +1,339 @@
+\startproject iras
+\mainlanguage[hu]
+\setupalign[
+  justified,
+  nothanging,
+  nohz,
+  hyphenated,
+  morehyphenated,
+  tolerant,
+]
+\setupinterlinespace[height=0.75,depth=0.25]
+\setuplayout[
+  grid=no,
+  location=middle,
+]
+\setupformulas[align=middle]
+%\setupmathalignment[grid=no]
+
+\def\PagenumberingCommand#1{\doifnot\pagenumber1{#1}}
+\setuppagenumbering[
+  location={footer,middle},
+  command=\PagenumberingCommand,
+]
+\setuppapersize[A4]
+\setuplayout[
+    backspace=30mm,
+    width=150mm,
+    topspace=15mm,
+    header=0mm,
+    footer=5mm,
+    footerdistance=0mm,
+    bottom=0mm,
+    bottomdistance=0mm,
+    height=267mm
+]
+
+% Betűkészlet
+%\setupbodyfont[libertinus,12pt]
+%\setupbodyfont[12pt]
+
+% Vékony spácium bizonyos karakterek előtt (:;?!)
+\definecharacterspacing [magyarpunctuation]
+\setupcharacterspacing [magyarpunctuation] ["0021] [left=.1,alternative=1] % ! % strip preceding space(char)
+\setupcharacterspacing [magyarpunctuation] ["003A] [left=.1,alternative=1] % : % strip preceding space(char)
+\setupcharacterspacing [magyarpunctuation] ["003B] [left=.1,alternative=1] % ; % strip preceding space(char)
+\setupcharacterspacing [magyarpunctuation] ["003F] [left=.1,alternative=1] % ? % strip preceding space(char)
+
+% A magyar nyelv beállításai
+\startsetups[magyar]
+  % Vékony spácium bizonyos karakterek előtt (:;?!)
+  \setcharacterspacing[magyarpunctuation]
+  \setupindenting[%
+    yes,% A bekezdéseket behúzással kezdjük.
+    %next,% Az első bekezdés nincs behúzva.
+    medium% Közepes méretű (átmeneti megoldás: igazából a mérete 24 cicerós sorig 1 kvirt, nagyobbbnál 2 kvirt kellene legyen -> TENNIALÓ)
+  ]
+\stopsetups
+
+\setuplanguage[hu][%
+  setups=magyar,% Érvényesíti a fent megadott beállításokat.
+  spacing=packed% Frenchspacing (Gyurgyák 319. o.: egyenletes szóközök).
+                % http://wiki.contextgarden.net/French_spacing).
+]
+
+% TENNIVALÓ: csak magyar nyelvre
+% Idézetek (Gyurgyák, 86--87. o.).
+\definedelimitedtext[quote][location=text]
+\setupdelimitedtext[quote:1][
+  left={\lowerleftdoubleninequote},
+  right={\upperrightdoubleninequote},
+  spaceafter=0
+]
+\setupdelimitedtext[quote:2][
+  left={\rightguillemot\nobreak\hskip-.07em},
+  right={\kern-0.03em\leftguillemot},
+  spaceafter=0
+]
+\setupdelimitedtext[quote:3][
+  left={\upperleftsingleninequote},
+  right={\upperrightsingleninequote},
+  spaceafter=0
+]
+
+\definebodyfontenvironment[default][em=italic]
+
+\defineframedtext[kerdes][align=center,offset=0.5ex,style=italic,width=\dimexpr0.8\dimexpr\makeupwidth]
+
+\defineframedtext[kivonat][frame=off,bodyfont=small,width=\makeupwidth]
+
+\definehead[feladat][subsubsubject]
+\setuphead[feladat][
+    number=no,
+    textdistance=0pt,
+    alternative=text,
+    style=bf,
+    commandafter={\hbox{.\quad}},
+]
+
+\definebar[mathubar][underbar]  % enélkül esetleg elcsúszik az aláhúzás
+
+%\showgrid[all]
+
+\definehead[cim][chapter]
+\setuphead[cim][number=no,align=middle,after={},]
+
+\definehead[alcim][section]
+\setuphead[alcim][number=no,align=middle,after={},]
+
+\startproduct iras
+\startbodymatter
+
+%\cim{Mértékegység táblázatok}
+%\startlinealignment[middle]
+%v1.0
+%\stoplinealignment
+ 
+% \blank
+
+% Az ember az egyszerű megszámlálhatóságon, a darabszámon túl még rengeteg mindent képes mérni és ezáltal összehasonlítani is.
+% Mérünk távolságot, területet, tömeget, térfogatot, hőmérsékletet, energiát, fényt, és még elképesztően sok fizikai, kémiai, csillagászati, és más jelenséget.
+% 
+% Máig sem sikerült az emberiségnek egyezségre jutnia és közös mérési szabványt kialakítania, habár már talán közel az év, amikor ez bekövetkezik. Az {\em SI}, a Nemzetközi Mértékegységrendszer a tudományos életben már teljesen elfogadott, sőt a hétköznapi ember számára is ezt a rendszert alkalmazza az angolszász országokon kívül szinte mindenütt.
+% 
+% A {\em mennyiség} egy mérés eredményének az egyértelmű megnevezése.
+% Például ha azt mondjuk, hogy egy adott buszban 80 ülőhely van, akkor ezzel mindenki számára érthető módon közöltük a busz ülőhelyek szerinti méretét.
+% A mennyiség {\em mértékből} és a dolog megnevezéséből áll, aminek a mennyiségét közöljük.
+% Az előbbi példában a mérték a 80 és a dolog pedig az ülőhely volt.
+% 
+% Ha a mérték darabszámot jelöl, akkor egyben {\em mérőszám} is.
+% Ha viszont a mérték nem darabszámot jelöl, akkor két részből áll maga is: {\em mérőszámból} és {\em mértékegységből}.
+% Például ha azt mondjuk, hogy 10\,m kötél, akkor a kötél mértéke a 10\,m, ebben pedig a 10 a mérőszám és az {\em m} (méter) a mértékegység.
+% 
+% Az {\em SI} mindössze hét alapegységet használ, és ezek adják vagy ezekből származtat minden mértékegységet.
+% Ebből az ötödik osztályban a következő négyet illik ismerni:
+
+% \blank
+
+\defineunit[textunit][alternative=text]
+
+\alcim{Alapegységek}
+
+\midaligned{
+\bTABLE
+\setupTABLE[frame=off,loffset=1em,roffset=1em]
+\setupTABLE[c][each][align={middle,lohi}]
+\setupTABLE[r][1,5][bottomframe=on]
+\bTR
+  \bTD \bf mérték \eTD
+  \bTD \bf alapegység \eTD
+  \bTD \bf jel \eTD
+\eTR
+\HL
+\bTR
+  \bTD hosszúság \eTD
+  \bTD méter \eTD
+  \bTD m \eTD
+\eTR
+\bTR
+  \bTD hőmérséklet \eTD
+  \bTD Kelvin \eTD
+  \bTD K \eTD
+\eTR
+\bTR
+  \bTD idő \eTD
+  \bTD másodperc (secundum) \eTD
+  \bTD s \eTD
+\eTR
+\bTR
+  \bTD tömeg \eTD
+  \bTD kilogramm \eTD
+  \bTD kg \eTD
+\eTR
+\bTR
+  \bTD terület \eTD
+  \bTD négyzetméter \eTD
+  \bTD m\high{2} \eTD
+\eTR
+\bTR
+  \bTD térfogat \eTD
+  \bTD köbméter \eTD
+  \bTD m\high{3} \eTD
+\eTR
+\eTABLE
+}
+
+%\blank[3cm]
+
+\alcim{Köznapi mértékegységek}
+
+\midaligned{
+\bTABLE
+\setupTABLE[frame=off,loffset=0.5em,roffset=0.5em]
+\setupTABLE[c][each][align={middle,lohi}]
+\setupTABLE[r][1][bottomframe=on]
+\bTR
+  \bTD \bf mérték \eTD
+  \bTD \bf egység \eTD
+  \bTD \bf jel \eTD
+  \bTD \bf átváltás módja \eTD
+\eTR
+\bTR
+  \bTD hőmérséklet \eTD
+  \bTD Celsius \eTD
+  \bTD \high{\circ}C \eTD
+  \bTD $[\text{\high{\circ}C}] = [\text{K}] - 273{,}15$ \eTD
+\eTR
+\bTR
+  \bTD hőmérséklet \eTD
+  \bTD Fahrenheit \eTD
+  \bTD \high{\circ}F \eTD
+  \bTD $[\text{\high{\circ}F}] = \displaystyle{\fraction{9}{5}} \cdot [\text{K}] - 459{,}67$ \eTD
+\eTR
+\bTR
+  \bTD idő \eTD
+  \bTD perc \eTD
+  \bTD min \eTD
+  \bTD $[\text{min}] = 60 \cdot [\text{s}]$ \eTD
+\eTR
+\bTR
+  \bTD idő \eTD
+  \bTD óra \eTD
+  \bTD h \eTD
+  \bTD $[\text{h}] = 60 \cdot [\text{min}]$ \eTD
+\eTR
+\bTR
+  \bTD idő \eTD
+  \bTD nap \eTD
+  \bTD d \eTD
+  \bTD $[\text{d}] = 24 \cdot [\text{h}]$ \eTD
+\eTR
+\bTR
+  \bTD tömeg \eTD
+  \bTD tonna \eTD
+  \bTD t \eTD
+  \bTD $[\text{t}] = 1000 \cdot [\text{kg}]$ \eTD
+\eTR
+\bTR
+  \bTD terület \eTD
+  \bTD hektár \eTD
+  \bTD ha \eTD
+  \bTD $[\text{ha}] = 10000 \cdot [\text{m\high{2}}]$ \eTD
+\eTR
+\bTR
+  \bTD térfogat \eTD
+  \bTD liter \eTD
+  \bTD l \eTD
+  \bTD $[\text{l}] = \displaystyle{\fraction{1}{1000}} \cdot [\text{m\high{3}}] = 1 \cdot [\text{dm\high{3}}]$ \eTD
+\eTR
+\eTABLE
+}
+
+%\blank[3cm]
+\alcim{Előtagok}
+
+\midaligned{
+\bTABLE
+\setupTABLE[frame=off,loffset=1em,roffset=1em]
+\setupTABLE[c][each][align={middle,lohi}]
+\setupTABLE[r][7,8,9,10,11,12][height=7ex]
+\setupTABLE[r][1][bottomframe=on]
+\bTR
+  \bTD \bf előtag \eTD
+  \bTD \bf jel \eTD
+  \bTD[nc=2] \bf szorzó \eTD
+\eTR
+\HL
+\bTR
+  \bTD giga \eTD
+  \bTD G \eTD
+  \bTD 10\high{9} \eTD
+  \bTD 1000000000 \eTD
+\eTR
+\bTR
+  \bTD mega \eTD
+  \bTD M \eTD
+  \bTD 10\high{6} \eTD
+  \bTD 1000000 \eTD
+\eTR
+\bTR
+  \bTD kilo \eTD
+  \bTD k \eTD
+  \bTD 10\high{3} \eTD
+  \bTD 1000 \eTD
+\eTR
+\bTR
+  \bTD hekto \eTD
+  \bTD h \eTD
+  \bTD 10\high{2} \eTD
+  \bTD 100 \eTD
+\eTR
+\bTR
+  \bTD deka \eTD
+  \bTD dk \eTD
+  \bTD 10\high{1} \eTD
+  \bTD 10 \eTD
+\eTR
+\bTR
+  \bTD \hrule \eTD
+  \bTD \hrule \eTD
+  \bTD 10\high{0} \eTD
+  \bTD 1 \eTD
+\eTR
+\bTR
+  \bTD deci \eTD
+  \bTD d \eTD
+  \bTD 10\high{-1} \eTD
+  \bTD $\displaystyle{\fraction{1}{10}}$ \eTD
+\eTR
+\bTR
+  \bTD centi \eTD
+  \bTD c \eTD
+  \bTD 10\high{-2} \eTD
+  \bTD $\displaystyle{\fraction{1}{100}}$ \eTD
+\eTR
+\bTR
+  \bTD milli \eTD
+  \bTD m \eTD
+  \bTD 10\high{-3} \eTD
+  \bTD $\displaystyle{\fraction{1}{1000}}$ \eTD
+\eTR
+\bTR
+  \bTD mikro \eTD
+  \bTD \mu \eTD
+  \bTD 10\high{-6} \eTD
+  \bTD $\displaystyle{\fraction{1}{1000000}}$ \eTD
+\eTR
+\bTR
+  \bTD nano \eTD
+  \bTD n \eTD
+  \bTD 10\high{-9} \eTD
+  \bTD $\displaystyle{\fraction{1}{1000000000}}$ \eTD
+\eTR
+\eTABLE
+}
+
+
+\stopbodymatter
+\stopproduct
+\stopproject
